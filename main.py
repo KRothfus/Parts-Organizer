@@ -58,7 +58,7 @@ def main():
                     #else:
                         #print(f'No parts were found using any of the following search terms: {searchTermList}')
                         
-                elif len(searchTermlist) >= 2:
+                elif len(searchTermList) >= 2:
                     for searchTerm in searchTermList:                
                         if eachDesc == searchTerm:
                             foundPart = part.get('location')
