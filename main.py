@@ -44,12 +44,37 @@ def main():
         with open("Partdata.json",'w') as f:
             ujson.dump(parts,f)
             
+    def searchParts(parts: dict,searchTermList: list):
+        for part in parts:
+            #part.get('description').replace(':','')
+            #part.get('description').replace(';','')
+            searchDesc = part.get('description').split(" ")
+            
+            for eachDesc in searchDesc:
+                if len(searchTermList) == 1:       
+                    if eachDesc == searchTermList[0]:
+                        foundPart = part.get('location')
+                        print(f'Part {eachDesc} matches the term {searchTermList} at location {foundPart}.')
+                    #else:
+                        #print(f'No parts were found using any of the following search terms: {searchTermList}')
+                        
+                elif len(searchTermlist) >= 2:
+                    for searchTerm in searchTermList:                
+                        if eachDesc == searchTerm:
+                            foundPart = part.get('location')
+                            print(f'Part {eachDesc} matches the term {searchTerm} at location {foundPart}.')
+                        #else:
+                            #print(f'No parts were found using any of the following search terms: {searchTermList}')
+
     #Main loop     
     while prgm:
         readResult = input("Do you want to: \n1. Search for a part? \n2. Add a part? \n3. Delete a part?\n4. Change a qty? \n5. Exit and Save?\n")
 
         if readResult == "1":
             print("You have chosen to search for a part.")
+            readResult = input("Please input the list of search terms you would like to use separated by commas.")
+            readResultList = readResult.split(',')
+            searchParts(parts, readResultList)
             
         elif  readResult == "2":
             
